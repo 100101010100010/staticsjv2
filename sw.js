@@ -1,26 +1,3 @@
-
-const ADBLOCK = {
-    blocked: [
-  "krxd.net",
-  "demdex.net"
-]   
-};
-
-function isAdBlocked(url) {
-    const urlStr = url.toString();
-    for (const pattern of ADBLOCK.blocked) {
-        let regexPattern = pattern
-            .replace(/\*/g, '.*')
-            .replace(/\./g, '\\.')
-            .replace(/\?/g, '\\?');
-        const regex = new RegExp('^' + regexPattern + '$', 'i');
-        if (regex.test(urlStr)) {
-            return true;
-        }
-    }
-    return false;
-}
-
 const swPath = self.location.pathname;
 const basePath = swPath.substring(0, swPath.lastIndexOf('/') + 1);
 self.basePath = self.basePath || basePath;
