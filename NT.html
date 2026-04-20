@@ -1,337 +1,227 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>New Tab</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <base target="_blank">
 
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #0a0a0a;
-      color: #e4e4e7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-    }
 
-    .clock {
-      font-size: 4rem;
-      font-weight: 600;
-      letter-spacing: -2px;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://google.com/favicon.ico" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowgg Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/Destroyed12121/Staticsj@main/JS/scramjet.all.js" defer></script>
+    <script type="module">
+        import * as BareMux from "https://cdn.jsdelivr.net/npm/@mercuryworkshop/bare-mux/dist/index.mjs";
+        window.BareMux = BareMux;
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <script src="./script.js" defer></script>
+    <style>
+        /* 1. Import Nunito Font */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
 
-    .date {
-      font-size: 14px;
-      color: #71717a;
-      margin-bottom: 32px;
-    }
+        html,
+        body {
+            color: #000000;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            /* 2. Set Image Background */
+            background:
+                url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYQRTJHaA5S63TGVCxdL5yx3uu9Xg7J_y1tQ&s');
+            background-size: cover;
+            background-position: center;
+            font-family: "Nunito", sans-serif;
+        }
 
-    .search-box {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #0f0f0f;
-      border: 1px solid #1f1f1f;
-      border-radius: 12px;
-      padding: 12px 16px;
-      width: 100%;
-      max-width: 500px;
-      margin-bottom: 40px;
-    }
+        .game-embed-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-sizing: border-box;
+            color: #fff;
+            text-align: center;
+        }
 
-    .search-box i {
-      color: #71717a;
-      font-size: 14px;
-    }
+        /* 3. The Glassmorphism Card */
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            padding: 40px;
 
-    .search-box input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #e4e4e7;
-      font-size: 14px;
-      font-family: inherit;
-    }
+            /* Allow the panel to grow with the grid */
+            width: 95%;
+            /* Responsive margin for small screens */
+            max-width: 1200px;
+            /* Increased limit for landscape view */
+            height: auto;
+            /* Adjusts height based on content */
+            box-sizing: border-box;
 
-    .search-box input::placeholder {
-      color: #52525b;
-    }
+            /* Glass effect (kept from your original) */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px) saturate(160%);
+            -webkit-backdrop-filter: blur(15px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
 
-    .search-box select {
-      background: #1a1a1a;
-      border: none;
-      border-radius: 6px;
-      color: #71717a;
-      padding: 6px 10px;
-      font-size: 12px;
-      cursor: pointer;
-      outline: none;
-    }
+        .logo-text {
+            font-family: "Nunito", sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            /* Extra bold for Netlii look */
+            color: #000;
+            letter-spacing: -1px;
+            padding-bottom: 10px;
+        }
 
-    .shortcuts {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
-      max-width: 500px;
-      width: 100%;
-    }
+        .button-grid {
+            display: grid;
+            /* Creates 4 equal columns */
+            grid-template-columns: repeat(4, 1fr);
+            /* Creates 2 rows */
+            grid-template-rows: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            max-width: 1000px;
+            /* Increased to fit 4 buttons across */
+        }
 
-    .shortcut {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      cursor: pointer;
-    }
+        .c-button {
+            /* ... keep your existing styles ... */
+            width: 100%;
+            /* Allow buttons to fill grid width */
+            max-width: none;
+            /* Remove restriction so they span the column */
+            text-decoration: none;
+            box-sizing: border-box;
+        }
 
-    .shortcut-icon {
-      width: 52px;
-      height: 52px;
-      background: #0f0f0f;
-      border: 1px solid #1f1f1f;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s;
-    }
+        /* Responsive adjustment for small screens */
+        @media (max-width: 768px) {
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr);
+                /* 2x4 on mobile */
+            }
+        }
 
-    .shortcut:hover .shortcut-icon {
-      background: #1a1a1a;
-      transform: translateY(-2px);
-    }
+        /* 4. Glass Buttons */
+        .c-button {
+            /* Dimensions */
+            min-height: 120px;
+            /* Increased height */
+            aspect-ratio: 16 / 9;
+            /* Keeps them in a landscape "card" shape */
+            width: 100%;
+            /* Fills the grid column */
 
-    .shortcut-icon img {
-      width: 22px;
-      height: 22px;
-      filter: brightness(0) invert(0.7);
-    }
+            /* Layout inside the button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
 
-    .shortcut-icon i {
-      font-size: 20px;
-      color: #71717a;
-    }
+            /* Typography & Style */
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: #000;
+            border-radius: 16px;
+            /* Slightly rounder for the tile look */
+            border: 1px solid rgba(255, 255, 255, 0.4);
 
-    .shortcut-label {
-      font-size: 11px;
-      color: #71717a;
-      text-align: center;
-      max-width: 60px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+            /* Glass & Transitions */
+            background: rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-sizing: border-box;
+        }
 
-    .shortcut:hover .shortcut-label {
-      color: #e4e4e7;
-    }
+        /* Red Theme */
+        .btn-red {
+            background: rgba(255, 65, 54, 0.4);
+            border-color: rgba(255, 65, 54, 0.6);
+        }
 
-    .quote {
-      position: fixed;
-      bottom: 24px;
-      font-size: 13px;
-      color: #52525b;
-      max-width: 400px;
-      text-align: center;
-    }
+        .btn-red:hover {
+            background: #ff4136;
+            color: #fff;
+            transform: scale(1.05);
+        }
 
-    .loader {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-    }
+        /* Blue Theme */
+        .btn-blue {
+            background: rgba(0, 116, 217, 0.4);
+            border-color: rgba(0, 116, 217, 0.6);
+        }
 
-    .loader.show {
-      display: flex;
-    }
+        .btn-blue:hover {
+            background: #0074d9;
+            color: #fff;
+            transform: scale(1.05);
+        }
 
-    .spinner {
-      width: 32px;
-      height: 32px;
-      border: 2px solid #1f1f1f;
-      border-top-color: #ffffff;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
+        /* Green Theme */
+        .btn-green {
+            background: rgba(46, 245, 39, 0.4);
+            border-color: rgba(46, 245, 39, 0.6);
+        }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+        .btn-green:hover {
+            background: #2ef527;
+            color: #000;
+            transform: scale(1.05);
+        }
+
+        /* Purple Theme */
+        .btn-purple {
+            background: rgba(176, 13, 255, 0.4);
+            border-color: rgba(176, 13, 255, 0.6);
+        }
+
+        .btn-purple:hover {
+            background: #b00dff;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Orange Theme */
+        .btn-orange {
+            background: rgba(255, 133, 27, 0.4);
+            border-color: rgba(255, 133, 27, 0.6);
+        }
+
+        .btn-orange:hover {
+            background: #ff851b;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .game-embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
-  </div>
-
-  <div class="clock" id="clock">00:00</div>
-  <div class="date" id="date"></div>
-
-  <form class="search-box" id="searchForm">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" id="searchInput" placeholder="Search the web..." autocomplete="off">
-    <select id="engine">
-      <option value="https://search.brave.com/search?q=">Brave</option>
-      <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
-      <option value="https://www.google.com/search?q=">Google</option>
-    </select>
-  </form>
-
-  <div class="shortcuts" id="shortcuts">
-    <a class="shortcut" data-url="https://youtube.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg">
-      </div>
-      <span class="shortcut-label">YouTube</span>
-    </a>
-    <a class="shortcut" data-url="https://github.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg">
-      </div>
-      <span class="shortcut-label">GitHub</span>
-    </a>
-    <a class="shortcut" data-url="https://discord.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg">
-      </div>
-      <span class="shortcut-label">Discord</span>
-    </a>
-    <a class="shortcut" data-url="https://twitter.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg"></div>
-      <span class="shortcut-label">Twitter</span>
-    </a>
-    <a class="shortcut" data-url="https://reddit.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/reddit.svg">
-      </div>
-      <span class="shortcut-label">Reddit</span>
-    </a>
-    <a class="shortcut" data-url="https://spotify.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/spotify.svg">
-      </div>
-      <span class="shortcut-label">Spotify</span>
-    </a>
-    <a class="shortcut" data-url="https://netflix.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/netflix.svg">
-      </div>
-      <span class="shortcut-label">Netflix</span>
-    </a>
-    <a class="shortcut" data-url="https://twitch.tv">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg">
-      </div>
-      <span class="shortcut-label">Twitch</span>
-    </a>
-    <a class="shortcut" data-url="https://mail.google.com">
-      <div class="shortcut-icon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/gmail.svg"></div>
-      <span class="shortcut-label">Gmail</span>
-    </a>
-    <div class="shortcut" id="addShortcut">
-      <div class="shortcut-icon"><i class="fa-solid fa-plus"></i></div>
-      <span class="shortcut-label">Add</span>
+    <div id="gameContainer" class="game-embed-container">
+        <div id="buttonWrapper" class="button-wrapper">
+            <div class="logo-text">Emmetts Nowgg Portal</div>
+            <div class="button-grid">
+                <a href="https://108.ip.nowgg.fun/apps/a/19900/b.html" class="c-button btn-blue">Roblox</a>
+                <a href="https://108.ip.nowgg.fun/apps/robtop-games/1400/geometry-dash.html" class="c-button btn-green">Geometry Dash (Official)</a>
+        </div>
     </div>
-  </div>
-
-  <div class="quote" id="quote"></div>
-
-  <script>
-    const $ = s => document.querySelector(s);
-    const nav = url => {
-      $('#loader').classList.add('show');
-      window.parent?.postMessage({ type: 'navigate', url }, '*');
-    };
-
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      $('#clock').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
-      $('#date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    // Search
-    $('#searchForm').onsubmit = e => {
-      e.preventDefault();
-      const q = $('#searchInput').value.trim();
-      if (q) nav($('#engine').value + encodeURIComponent(q));
-    };
-
-    // Shortcuts
-    $('#shortcuts').onclick = e => {
-      const shortcut = e.target.closest('.shortcut[data-url]');
-      const addBtn = e.target.closest('#addShortcut');
-
-      if (shortcut) {
-        e.preventDefault();
-        nav(shortcut.dataset.url);
-      } else if (addBtn) {
-        const name = prompt("Shortcut name:");
-        if (!name) return;
-        let url = prompt("URL:");
-        if (!url) return;
-        if (!url.startsWith('http')) url = 'https://' + url;
-
-        const shortcuts = JSON.parse(localStorage.getItem('shortcuts') || '[]');
-        shortcuts.push({ name, url });
-        localStorage.setItem('shortcuts', JSON.stringify(shortcuts));
-        renderCustom();
-      }
-    };
-
-    function renderCustom() {
-      document.querySelectorAll('.custom-shortcut').forEach(e => e.remove());
-      const shortcuts = JSON.parse(localStorage.getItem('shortcuts') || '[]');
-      const addBtn = $('#addShortcut');
-
-      shortcuts.forEach(s => {
-        const div = document.createElement('div');
-        div.className = 'shortcut custom-shortcut';
-        div.dataset.url = s.url;
-        div.innerHTML = `
-          <div class="shortcut-icon"><i class="fa-solid fa-link"></i></div>
-          <span class="shortcut-label">${s.name}</span>
-        `;
-        addBtn.before(div);
-      });
-    }
-
-    // Quote
-    const quotes = [
-    "so tuff",
-    "it is what it is",
-    "do ur work",
-    "this is what happens when u dont touch grass",
-    "FULL BOX",
-    "FULL PIECE",
-    "200!",
-    "press esc + refresh + power button for hacks",
-    "press ctrl+x to hide your screen",
-    "change the tab title and favicon in settings",
-    "TEACHERR!",
-    "lebron lebron lebronn james",
-    "lebron is OUR goat"
-];
-    $('#quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-
-    renderCustom();
-  </script>
 </body>
-
-</html>
